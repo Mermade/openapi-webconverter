@@ -10,7 +10,7 @@
     "express": "^4.13.3",
     "compression": "^1.6.2",
     "ejs": "^2.5.1",
-	"swagger2openapi": "latest",
+	"swagger2openapi": "^1.1.7",
 	"js-yaml": "^3.6.1"
   }
 }
