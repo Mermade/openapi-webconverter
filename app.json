@@ -1,0 +1,9 @@
+{
+  "name": "Mermade Swagger to OpenAPI converter",
+  "description": "Convert between Swagger 2.0 and OpenAPI 3.0.0",
+  "repository": "https://github.com/mermade/openapi-webconverter",
+  "logo": "http://mermade.github.io/arapaho/logo.jpg",
+  "keywords": ["swagger", "openapi", "swagger2", "openapi3r", "conversion", "converter"],
+  "env": {
+  }
+}
