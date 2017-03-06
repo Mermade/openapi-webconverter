@@ -1,6 +1,6 @@
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-For now you can use the API to validate or convert Swagger 2.0 definitions
+For now you can use the API to convert Swagger 2.0 definitions or validate a 3.0.x definition
 <p>
 <ul>
    <li>POST /api/v1/convert</li>
