@@ -1,0 +1,146 @@
+/*######## Smart Green ########*/
+/* originally from http://www.sanwebe.com/2013/10/css-html-form-styles */
+.smart-green {
+    margin-left:auto;
+    margin-right:auto;
+
+    max-width: 750px;
+    background: #F8F8F8;
+    padding: 30px 30px 20px 30px;
+    font: 12px Arial, Helvetica, sans-serif;
+    color: #666;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+.smart-green h1 {
+    font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    padding: 20px 0px 20px 40px;
+    display: block;
+    margin: -30px -30px 10px -30px;
+    color: #FFF;
+    background: #9DC45F;
+    text-shadow: 1px 1px 1px #949494;
+    border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    border-bottom:1px solid #89AF4C;
+}
+
+.smart-green a{
+	color: #9DC45F;
+}
+.smart-green h2>a {
+    color: #666;
+}
+
+.smart-green h1>span {
+    display: block;
+    font-size: 11px;
+    color: #FFF;
+}
+
+.smart-green label {
+    display: block;
+    margin: 0px 0px 5px;
+}
+.smart-green label>span {
+    float: left;
+    margin-top: 10px;
+    color: #5E5E5E;
+}
+.smart-green input[type="text"], .smart-green input[type="email"], .smart-green input[type="password"], .smart-green input[type="range"],
+	.smart-green textarea, .smart-green select {
+    color: #555;
+    height: 30px;
+    line-height:15px;
+    font: normal 14px/14px Arial, Helvetica, sans-serif;
+    width: 100%;
+    padding: 0px 0px 0px 10px;
+    margin-top: 2px;
+    border: 1px solid #E5E5E5;
+    background: #FBFBFB;
+    outline: 0;
+    -webkit-box-shadow: inset 1px 1px 2px rgba(238, 238, 238, 0.2);
+    box-shadow: inset 1px 1px 2px rgba(238, 238, 238, 0.2);
+}
+
+input[type="text"]:disabled, input[type="password"]:disabled {
+    background: #dddddd;
+}
+
+.smart-green textarea{
+    height:100px;
+    padding-top: 10px;
+}
+
+.smart-green .sg-sml-block{
+    height:100px;
+    padding-top: 10px;
+    line-height:15px;
+    font: normal 14px/14px Arial, Helvetica, sans-serif;
+}
+
+.smart-green .sg-med-block{
+    height:200px;
+    padding-top: 10px;
+}
+
+.smart-green .sg-block{
+    height:300px;
+    padding-top: 10px;
+}
+
+.smart-green select {
+    background: url('/images/down-arrow.png') no-repeat right, -moz-linear-gradient(top, #FBFBFB 0%, #E9E9E9 100%);
+    background: url('/images/down-arrow.png') no-repeat right, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FBFBFB), color-stop(100%,#E9E9E9));
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    width:100%;
+    height:30px;
+}
+.smart-green .button {
+    background-color: #9DC45F;
+	background-image: linear-gradient(to bottom, #9DC45F, #bada55);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-border-radius: 5px;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    text-shadow: 1px 1px 1px #949494;
+}
+.smart-green .button:hover {
+    background-color:#80A24A;
+	background-image: linear-gradient(to bottom, #80A24A, #9DC45F);
+}
+.smart-green .button:disabled {
+    background-color:#808080;
+}
+.smart-green .sg-button-box {
+    margin-top: 10px;
+    color: #5E5E5E;
+    margin-bottom: 10px;
+}
+
+.smart-green .required {
+    color:red;
+}
+
+.hidden {
+	display: none;
+}
+
+.grey-bg {
+	background: #F8F8F8;
+	max-width: 750px;
+    padding: 30px 30px 20px 30px;
+    margin-left:auto;
+    margin-right:auto;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
