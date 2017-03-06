@@ -2,6 +2,8 @@
 
 [Convert](https://openapi-converter.herokuapp.com) Swagger 2.0 definitions or [validate](https://openapi-converter.herokuapp.com) OpenAPI 3.0.x definitions
 
+Conversions and validations are performed by [swagger2openapi](https://github.com/mermade/swagger2openapi)
+
 You may also use the API to convert Swagger 2.0 definitions or validate a 3.0.x definition
 <p>
 <ul>
