@@ -16,7 +16,7 @@ status.conversions = 0;
 status.validations = 0;
 status.targetVersion = converter.targetVersion;
 
-function getObj(body){
+function getObj(body,payload){
 	var obj = {};
 	try {
 		obj = JSON.parse(body);
@@ -24,6 +24,7 @@ function getObj(body){
 	catch(ex) {
 		try {
 			obj = yaml.safeLoad(body);
+			payload.yaml = true;
 		}
 		catch(ex) {
 			console.log(body);
@@ -51,14 +52,20 @@ app.post('/api/v1/validate',function(req,res){
 	var result = {};
 	result.status = false;
 	var body = req.body.source;
-	var obj = getObj(body);
+	var payload = {};
+	var obj = getObj(body,payload);
 	try {
 		result.status = validator.validate(obj,{});
 	}
 	catch(ex) {
 		result.message = ex.message;
 	}
-	res.send(JSON.stringify(result,null,2));
+	if (payload.yaml) {
+		res.send(yaml.dump(result));
+	}
+	else {
+		res.send(JSON.stringify(result,null,2));
+	}
 });
 
 app.post('/api/v1/convert',function(req,res){
@@ -66,14 +73,20 @@ app.post('/api/v1/convert',function(req,res){
 	var result = {};
 	result.status = false;
 	var body = req.body.source;
-	var obj = getObj(body);
+	var payload = {};
+	var obj = getObj(body,payload);
 	try {
 		result = converter.convert(obj,{});
 	}
 	catch(ex) {
 		result.message = ex.message;
 	}
-	res.send(JSON.stringify(result,null,2));
+	if (payload.yaml) {
+		res.send(yaml.dump(result));
+	}
+	else {
+		res.send(JSON.stringify(result,null,2));
+	}
 });
 
 var myport = process.env.PORT || 3000;
