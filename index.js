@@ -3,6 +3,7 @@ var path = require('path');
 var express = require('express');
 var ejs = require('ejs');
 var compression = require('compression');
+var bodyParser = require('body-parser');
 
 var yaml = require('js-yaml');
 
@@ -13,6 +14,7 @@ var status = {};
 status.startTime = new Date();
 status.conversions = 0;
 status.validations = 0;
+status.targetVersion = converter.targetVersion;
 
 function getObj(body){
 	var obj = {};
@@ -23,19 +25,22 @@ function getObj(body){
 		try {
 			obj = yaml.safeLoad(body);
 		}
-		catch(ex) { }
+		catch(ex) {
+			console.log(body);
+		}
 	}
 	return obj;
 }
 
 var app = express();
 app.use(compression());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 
-app.get('/', function(req,res) { res.render(path.join(__dirname,'index.html')) });
-app.get('*.html', function(req,res) { res.render(path.join(__dirname,req.path)) });
+app.get('/', function(req,res) { res.render(path.join(__dirname,'index.html'),status) });
+app.get('*.html', function(req,res) { res.render(path.join(__dirname,req.path,status)) });
 app.use("/",  express.static(__dirname));
 
 app.get('/api/v1/status',function(req,res){
@@ -43,42 +48,32 @@ app.get('/api/v1/status',function(req,res){
 });
 app.post('/api/v1/validate',function(req,res){
 	status.validations++;
-	var body = '';
-	req.on('data',function(chunk){
-		body += chunk;
-	});
-	req.on('end',function(){
-		var result = {};
-		result.status = false;
-		var obj = getObj(body);
-		try {
-			result.status = validator.validate(obj,{});
-		}
-		catch(ex) {
-			result.message = ex.message;
-		}
-		res.send(JSON.stringify(result,null,2));
-	});
+	var result = {};
+	result.status = false;
+	var body = req.body.source;
+	var obj = getObj(body);
+	try {
+		result.status = validator.validate(obj,{});
+	}
+	catch(ex) {
+		result.message = ex.message;
+	}
+	res.send(JSON.stringify(result,null,2));
 });
 
 app.post('/api/v1/convert',function(req,res){
 	status.conversions++;
-	var body = '';
-	req.on('data',function(chunk){
-		body += chunk;
-	});
-	req.on('end',function(){
-		var result = {};
-		result.status = false;
-		var obj = getObj(body);
-		try {
-			result = converter.convert(obj,{});
-		}
-		catch(ex) {
-			result.message = ex.message;
-		}
-		res.send(JSON.stringify(result,null,2));
-	});
+	var result = {};
+	result.status = false;
+	var body = req.body.source;
+	var obj = getObj(body);
+	try {
+		result = converter.convert(obj,{});
+	}
+	catch(ex) {
+		result.message = ex.message;
+	}
+	res.send(JSON.stringify(result,null,2));
 });
 
 var myport = process.env.PORT || 3000;
