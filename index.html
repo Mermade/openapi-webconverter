@@ -1,31 +1,48 @@
-<html>
+<html lang="en">
+
 <head>
-<title>Mermade Swagger 2.0 to OpenAPI <%= targetVersion %> converter</title>
-<link rel="stylesheet" type="text/css" href="/css/smart-green.css" media="screen">
+	<title>Mermade Swagger 2.0 to OpenAPI
+		<%= targetVersion %> converter</title>
+	<link rel="stylesheet" type="text/css" href="/css/smart-green.css" media="screen">
 </head>
+
 <body>
-<a href="https://github.com/mermade/swagger2openapi"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
-	<div class="smart-green">
-		<h1>Mermade Swagger 2.0 to OpenAPI <%= targetVersion %> converter</h1>
-		<form method="post" action="/api/v1/convert">
-			<textarea type="textarea" name="source" id="txtSource" maxLength="150000" rows="7" cols="50"></textarea>
-			<p>
-			<button class="button" type="submit">Convert</button>
-		</form>
-		<p>
-		<form method="post" action="/api/v1/validate">
-			<textarea type="textarea" name="source" id="txtSource" maxLength="150000" rows="7" cols="50"></textarea>
-			<p>
-			<button class="button" type="submit">Validate</button>
-		</form>
-		<p>
-		You may also use the API to convert Swagger 2.0 definitions or validate a 3.0.x definition
-		<p>
-		<ul>
-			<li><i>POST</i> <b>/api/v1/convert</b> - with a source parameter</li>
-			<li><i>POST</i> <b>/api/v1/validate</b> - with a source parameter</li>
-			<li><i>GET </i><a href="/api/v1/status">/api/v1/status</a></li>
-		</ul>
+	<a href="https://github.com/mermade/swagger2openapi"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67"
+alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+<div class="smart-green">
+	<h1>Mermade Swagger 2.0 to OpenAPI
+		<%= targetVersion %> converter</h1>
+	<div align="center">
+		<a href="https://github.com/Mermade/swagger2openapi"><img src="https://github.com/Mermade/swagger2openapi/raw/master/docs/logo.png?raw=true" alt="logo"></a>
 	</div>
+	<form method="post" enctype="multipart/form-data" action="/api/v1/convert">
+		<textarea name="source" id="txtSource1" maxLength="150000" rows="7" cols="50"></textarea>
+		<p>
+		<button class="button" type="submit">Convert Swagger/OpenAPI 2.0</button>
+	</form>
+	<form method="post" enctype="multipart/form-data" action="/api/v1/convert">
+		<input type="file" name="filename" accept="application/json,text/yaml,application/yaml">
+		<button class="button">Upload File</button>
+	</form>
+	<hr>
+	<form method="post" enctype="multipart/form-data" action="/api/v1/validate">
+		<textarea name="source" id="txtSource2" maxLength="150000" rows="7" cols="50"></textarea>
+		<p>
+		<button class="button" type="submit">Validate OpenAPI 3.0.x</button>
+	</form>
+	<form method="post" enctype="multipart/form-data" action="/api/v1/validate">
+		<input type="file" name="filename" accept="application/json,text/yaml,application/yaml">
+		<button class="button">Upload File</button>
+	</form>
+	<p>
+		You may also use the API to convert Swagger 2.0 definitions or validate a 3.0.x definition
+	</p>
+	<ul>
+		<li><i>POST</i> <b>/api/v1/convert</b> - with a source parameter</li>
+		<li><i>POST</i> <b>/api/v1/validate</b> - with a source parameter</li>
+		<li><i>GET </i><a href="/api/v1/status">/api/v1/status</a></li>
+	</ul>
+</div>
 </body>
+
 </html>

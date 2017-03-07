@@ -1,9 +1,13 @@
 var path = require('path');
+var util = require('util');
 
 var express = require('express');
 var ejs = require('ejs');
 var compression = require('compression');
 var bodyParser = require('body-parser');
+var multer = require('multer');
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage });
 
 var yaml = require('js-yaml');
 
@@ -47,12 +51,19 @@ app.use("/",  express.static(__dirname));
 app.get('/api/v1/status',function(req,res){
 	res.send(JSON.stringify(status,null,2));
 });
-app.post('/api/v1/validate',function(req,res){
+app.post('/api/v1/validate', upload.single('filename'), function(req,res){
 	status.validations++;
 	var result = {};
 	result.status = false;
-	var body = req.body.source;
+	var body = req.body.source||(req.file ? req.file.buffer.toString() : '');
 	var payload = {};
+	payload.prefix = '<html><body><pre>';
+	if ((req.headers.accept == 'application/json') || (req.headers.accept.endsWith('yaml'))) {
+		payload.prefix = '';
+	}
+	if (req.headers['content-type'] == 'application/x-www-form-urlencoded') {
+		result.warning = 'Your browser sent the wrong Content-Type header. Try pasting your document';
+	}
 	var obj = getObj(body,payload);
 	try {
 		result.status = validator.validate(obj,{});
@@ -61,19 +72,26 @@ app.post('/api/v1/validate',function(req,res){
 		result.message = ex.message;
 	}
 	if (payload.yaml) {
-		res.send(yaml.dump(result));
+		res.send(payload.prefix+yaml.safeDump(result));
 	}
 	else {
-		res.send(JSON.stringify(result,null,2));
+		res.send(payload.prefix+JSON.stringify(result,null,2));
 	}
 });
 
-app.post('/api/v1/convert',function(req,res){
+app.post('/api/v1/convert', upload.single('filename'), function(req,res){
 	status.conversions++;
 	var result = {};
 	result.status = false;
-	var body = req.body.source;
+	var body = (req.body ? req.body.source : '')||(req.file ? req.file.buffer.toString() : '');
 	var payload = {};
+	payload.prefix = '<html><body><pre>';
+	if ((req.headers.accept == 'application/json') || (req.headers.accept.endsWith('yaml'))) {
+		payload.prefix = '';
+	}
+	if (req.headers['content-type'] == 'application/x-www-form-urlencoded') {
+		result.warning = 'Your browser sent the wrong Content-Type header. Try pasting your document';
+	}
 	var obj = getObj(body,payload);
 	try {
 		result = converter.convert(obj,{});
@@ -82,10 +100,10 @@ app.post('/api/v1/convert',function(req,res){
 		result.message = ex.message;
 	}
 	if (payload.yaml) {
-		res.send(yaml.dump(result));
+		res.send(payload.prefix+yaml.safeDump(result));
 	}
 	else {
-		res.send(JSON.stringify(result,null,2));
+		res.send(payload.prefix+JSON.stringify(result,null,2));
 	}
 });
 
