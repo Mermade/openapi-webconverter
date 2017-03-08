@@ -1,9 +1,12 @@
 {
   "name": "openapi-webconverter",
   "version": "1.0.0",
-  "description": "Online converter from Swagger 2.0 to OpenAPI 3.0.0",
+  "description": "Online converter/validator from Swagger 2.0 to OpenAPI 3.0.0",
   "main": "index.js",
-  "repository": {},
+  "repository": {
+    "url": "https://github.com/Mermade/openapi-webconverter.git",
+	"type": "git"
+  },
   "author": "Mike Ralphson <mike.ralphson@gmail.com>",
   "license": "BSD-3-Clause",
   "dependencies": {
@@ -13,6 +16,7 @@
     "express": "^4.13.3",
     "js-yaml": "^3.6.1",
     "multer": "^1.3.0",
-    "swagger2openapi": "^1.1.14"
+    "node-fetch": "^1.6.3",
+    "swagger2openapi": "^1.1.15"
   }
 }

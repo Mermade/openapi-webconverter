@@ -8,17 +8,20 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var storage = multer.memoryStorage();
 var upload = multer({ storage: storage });
+var fetch = require('node-fetch');
 
 var yaml = require('js-yaml');
 
 var converter = require('swagger2openapi');
 var validator = require('swagger2openapi/validate.js');
+var s2oVersion = require('swagger2openapi/common.js').getVersion();
 
 var status = {};
 status.startTime = new Date();
 status.conversions = 0;
 status.validations = 0;
 status.targetVersion = converter.targetVersion;
+status.s2oVersion = s2oVersion;
 
 function getObj(body,payload){
 	var obj = {};
@@ -47,10 +50,55 @@ app.engine('html', ejs.renderFile);
 app.get('/', function(req,res) { res.render(path.join(__dirname,'index.html'),status) });
 app.get('*.html', function(req,res) { res.render(path.join(__dirname,req.path,status)) });
 app.use("/",  express.static(__dirname));
+app.use("/examples/",  express.static(path.join(__dirname,'examples')));
 
 app.get('/api/v1/status',function(req,res){
 	res.send(JSON.stringify(status,null,2));
 });
+
+function validate(req, res, badge) {
+
+	status.validations++;
+	result = {};
+	result.status = false;
+	if (req.query.url) {
+		fetch(req.query.url).then(function(res) {
+ 	 		return res.text();
+		}).then(function(body) {
+			var payload = {};
+			var obj = getObj(body,payload);
+			try {
+				result.status = validator.validate(obj,{});
+			}
+			catch(ex) {
+				result.message = ex.message;
+			}
+			if (badge) {
+				if (result.status) {
+					res.redirect('https://img.shields.io/badge/OpenAPI3-Valid-brightgreen.svg');
+				}
+				else {
+					res.redirect('https://img.shields.io/badge/OpenAPI3-Invalid-red.svg');
+				}
+			}
+			else {
+	 			res.send(JSON.stringify(result));
+			}
+		});
+
+	}
+	else {
+		res.send('You must provide a URL parameter');
+	}
+}
+
+app.get('/api/v1/validate', function(req,res) {
+	validate(req,res,false);
+});
+app.get('/api/v1/badge', function(req,res) {
+	validate(req,res,true);
+});
+
 app.post('/api/v1/validate', upload.single('filename'), function(req,res){
 	status.validations++;
 	var result = {};
