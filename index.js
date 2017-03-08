@@ -69,11 +69,13 @@ function validate(req, res, badge) {
 		}).then(function(body) {
 			var payload = {};
 			var obj = getObj(body,payload);
+			var options = {};
 			try {
-				result.status = validator.validate(obj,{});
+				result.status = validator.validate(obj,options);
 			}
 			catch(ex) {
 				result.message = ex.message;
+				result.context = options.context.pop();
 			}
 			if (badge) {
 				if (result.status) {
@@ -121,11 +123,13 @@ app.post('/api/v1/validate', upload.single('filename'), function(req,res){
 		result.warning = 'Your browser sent the wrong Content-Type header. Try pasting your document';
 	}
 	var obj = getObj(body,payload);
+	var options = {};
 	try {
-		result.status = validator.validate(obj,{});
+		result.status = validator.validate(obj,options);
 	}
 	catch(ex) {
 		result.message = ex.message;
+		result.context = options.context.pop();
 	}
 	res.set('Content-Type',payload.contentType);
 	if (payload.yaml) {
