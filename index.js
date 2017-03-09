@@ -59,7 +59,6 @@ app.get('/api/v1/status',function(req,res){
 });
 
 function validate(req, res, badge) {
-
 	status.validations++;
 	result = {};
 	result.status = false;
@@ -140,7 +139,42 @@ app.post('/api/v1/validate', upload.single('filename'), function(req,res){
 	}
 });
 
-app.post('/api/v1/convert', upload.single('filename'), function(req,res){
+app.get('/api/v1/convert', function(req,res) {
+	status.conversions++;
+	result = {};
+	result.status = false;
+	if (req.query.url) {
+		fetch(req.query.url).then(function(res) {
+ 	 		return res.text();
+		}).then(function(body) {
+			var payload = {};
+			var obj = getObj(body,payload);
+			var options = {};
+			options.origin = req.query.url;
+			try {
+				result= converter.convert(obj,options);
+			}
+			catch(ex) {
+				result.message = ex.message;
+			}
+			if (payload.yaml) {
+				res.set('Content-Type','text/yaml');
+				res.send(yaml.safeDump(result));
+			}
+			else {
+				res.set('Content-Type', 'application/json');
+	 			res.send(JSON.stringify(result,null,2));
+			}
+		});
+	}
+	else {
+		result.message = 'You must provide a URL parameter';
+		res.set('Content-Type', 'application/json');
+		res.send(JSON.stringify(result));
+	}
+});
+
+app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 	status.conversions++;
 	var result = {};
 	result.status = false;
