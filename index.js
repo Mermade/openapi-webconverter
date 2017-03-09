@@ -152,9 +152,17 @@ app.get('/api/v1/convert', function(req,res) {
 			var options = {};
 			options.origin = req.query.url;
 			try {
-				result= converter.convert(obj,options);
+				result = converter.convert(obj,options);
+				if (req.params.validate) {
+					validator.validate(result,options);
+				}
 			}
 			catch(ex) {
+				if (result.context) {
+					result = {};
+					result.status = false; // reset
+					result.context = options.context.pop();
+				}
 				result.message = ex.message;
 			}
 			if (payload.yaml) {
