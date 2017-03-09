@@ -150,7 +150,7 @@ input[type="text"]:disabled, input[type="password"]:disabled {
 
 .tabs {
   position: relative;   
-  min-height: 350px; /* This part sucks. Investigate if CSS variables/queries would help */
+  min-height: 425px; /* This part sucks. Investigate if CSS variables/queries would help */
   clear: both;
   margin: 25px 0;
 }

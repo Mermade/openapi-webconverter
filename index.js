@@ -154,6 +154,7 @@ app.get('/api/v1/convert', function(req,res) {
 			try {
 				result = converter.convert(obj,options);
 				if (req.params.validate) {
+					status.validations++;
 					validator.validate(result,options);
 				}
 			}
@@ -187,6 +188,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 	var result = {};
 	result.status = false;
 	var body = (req.body ? req.body.source : '')||(req.file ? req.file.buffer.toString() : '');
+	var validate = (req.body && req.body.validate); // on or undefined
 	var payload = {};
 	payload.prefix = '<html><body><pre>';
 	payload.contentType = 'text/html';
@@ -199,10 +201,20 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 		result.warning = 'Your browser sent the wrong Content-Type header. Try pasting your document';
 	}
 	var obj = getObj(body,payload);
+	var options = {};
 	try {
-		result = converter.convert(obj,{});
+		result = converter.convert(obj,options);
+		if (validate) {
+			status.validations++;
+			validator.validate(result,options);
+		}
 	}
 	catch(ex) {
+		if (options.context) {
+			result = {};
+			result.status = false;
+			result.context = options.context.pop();
+		}
 		result.message = ex.message;
 	}
 	res.set('Content-Type',payload.contentType);
