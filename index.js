@@ -86,7 +86,7 @@ function validate(req, res, badge) {
 			}
 			else {
 				res.set('Content-Type', 'application/json');
-	 			res.send(JSON.stringify(result));
+	 			res.send(JSON.stringify(result,null,2));
 			}
 		});
 
@@ -94,7 +94,7 @@ function validate(req, res, badge) {
 	else {
 		result.message = 'You must provide a URL parameter';
 		res.set('Content-Type', 'application/json');
-		res.send(JSON.stringify(result));
+		res.send(JSON.stringify(result,null,2));
 	}
 }
 
@@ -179,7 +179,7 @@ app.get('/api/v1/convert', function(req,res) {
 	else {
 		result.message = 'You must provide a URL parameter';
 		res.set('Content-Type', 'application/json');
-		res.send(JSON.stringify(result));
+		res.send(JSON.stringify(result,null,2));
 	}
 });
 
