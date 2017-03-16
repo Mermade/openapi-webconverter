@@ -1,0 +1,194 @@
+{
+  "openapi": "3.0.0-RC0",
+  "servers": [
+    {
+      "url": "http://openapi-converter.herokuapp.com/api/v1"
+    },
+    {
+      "url": "https://openapi-converter.herokuapp.com/api/v1"
+    }
+  ],
+  "info": {
+    "title": "Swagger2OpenAPI Converter",
+    "version": "1.0",
+    "contact": {
+      "name": "Mike Ralphson",
+      "email": "mike.ralphson@gmail.com",
+      "url": "https://github.com/mermade/swagger2openapi/issues"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "description": "Converter and validator for Swagger 2.0 to OpenAPI 3.0.x definitions",
+    "termsOfService": "https://opensource.org/licenses/MIT"
+  },
+  "externalDocs": {},
+  "security": [],
+  "tags": [
+    {
+      "name": "conversion",
+      "description": "Conversion"
+    },
+    {
+      "name": "validation",
+      "description": "Validation"
+    }
+  ],
+  "paths": {
+    "/status": {
+      "get": {
+        "summary": "Get the status of the API",
+        "description": "",
+        "parameters": [],
+        "operationId": "getStatus",
+        "responses": {
+          "200": {
+            "description": "default"
+          }
+        }
+      }
+    },
+    "/convert": {
+      "get": {
+        "summary": "Convert a Swagger 2.0 definition to OpenAPI 3.0.x from a URL",
+        "description": "",
+        "parameters": [],
+        "operationId": "convertUrl",
+        "responses": {
+          "200": {
+            "description": "default"
+          }
+        }
+      },
+      "post": {
+        "summary": "Convert a Swagger 2.0 definition passed in the body to OpenAPI 3.0.x ",
+        "description": "",
+        "parameters": [],
+        "operationId": "convert",
+        "responses": {
+          "200": {
+            "description": "default"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filename": {
+                    "description": "The file to upload and convert",
+                    "type": "string",
+                    "required": false
+                  },
+                  "source": {
+                    "description": "The text of a Swagger 2.0 definition to convert",
+                    "type": "string",
+                    "required": false
+                  },
+                  "validate": {
+                    "type": "string",
+                    "enum": [
+                      "on"
+                    ],
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/validate": {
+      "get": {
+        "summary": "Validate an OpenAPI 3.0.x definition",
+        "description": "",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "The URL to retrieve the OpenAPI 3.0.x definition from",
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ],
+        "operationId": "validateUrl",
+        "responses": {
+          "200": {
+            "description": "default"
+          }
+        }
+      },
+      "post": {
+        "summary": "Validate an OpenAPI 3.0.x definition supplied in the body of the request",
+        "description": "",
+        "parameters": [],
+        "operationId": "validate",
+        "responses": {
+          "200": {
+            "description": "default"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filename": {
+                    "description": "The file to upload and validate",
+                    "type": "string",
+                    "required": false
+                  },
+                  "source": {
+                    "description": "The text of an OpenAPI 3.0.x definition to validate",
+                    "type": "string",
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/badge": {
+      "get": {
+        "summary": "Return a redirect to a badge svg file depending on a source definition's validity",
+        "description": "",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "The URL to retrieve the OpenAPI 3.0.x definition from",
+            "schema": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        ],
+        "operationId": "getBadge",
+        "responses": {
+          "301": {
+            "description": "Moved"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "parameters": {},
+    "examples": {},
+    "requestBodies": {},
+    "securitySchemes": {},
+    "headers": {}
+  }
+}

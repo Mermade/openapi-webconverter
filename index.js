@@ -52,6 +52,7 @@ app.get('/', function(req,res) { res.render(path.join(__dirname,'index.html'),st
 app.get('*.html', function(req,res) { res.render(path.join(__dirname,req.path,status)) });
 app.use("/",  express.static(__dirname));
 app.use("/examples/",  express.static(path.join(__dirname,'examples')));
+app.use("/contract/",  express.static(path.join(__dirname,'contract')));
 
 app.get('/api/v1/status',function(req,res){
 	res.set('Content-Type', 'application/json');
