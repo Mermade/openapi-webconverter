@@ -45,7 +45,7 @@ function getObj(body,payload){
 var app = express();
 
 app.options('*',function(req,res,next){
-	res.set('Access-Control-Allow-Origin',req.headers['origin']);
+	res.set('Access-Control-Allow-Origin',req.headers['origin']||'*');
 	res.set('Access-Control-Allow-Methods','GET, POST, HEAD, OPTIONS');
 	res.set('Access-Control-Allow-Headers',req.headers['access-control-request-headers']||
 		'Content-Type, Authorization, Content-Length, X-Requested-With');
