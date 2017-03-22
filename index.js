@@ -43,6 +43,15 @@ function getObj(body,payload){
 }
 
 var app = express();
+
+app.options('*',function(req,res,next){
+	res.set('Access-Control-Allow-Origin','*');
+	res.set('Access-Control-Allow-Methods','GET, POST, HEAD, OPTIONS');
+	res.set('Access-Control-Allow-Headers',req.headers['access-control-request-headers']||
+		'Content-Type, Authorization, Content-Length, X-Requested-With');
+	res.sendStatus(204);
+});
+
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -63,11 +72,6 @@ app.get('/contract/:spec.json',function(req,res){
 
 app.use("/",  express.static(__dirname));
 
-app.head('/api/v1/status',function(req,res){
-	res.set('Content-Type', 'application/json');
-	res.set('Access-Control-Allow-Origin','*');
-	res.end();
-});
 app.get('/api/v1/status',function(req,res){
 	res.set('Content-Type', 'application/json');
 	res.set('Access-Control-Allow-Origin','*');
