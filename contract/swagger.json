@@ -36,6 +36,10 @@
     "basePath": "/api/v1",
     "tags": [
         {
+            "name": "metadata",
+            "description": "Metadata"
+        },
+        {
             "name": "conversion",
             "description": "Conversion"
         },
@@ -50,6 +54,9 @@
                 "summary": "Get the status of the API",
                 "description": "",
                 "parameters": [],
+			    "tags": [
+					"metadata"
+				],
                 "operationId": "getStatus",
                 "responses": {
                     "200": {
@@ -64,6 +71,9 @@
                 "description": "",
                 "parameters": [],
                 "operationId": "convertUrl",
+			    "tags": [
+					"convert"
+				],
                 "responses": {
                     "200": {
                         "description": "default"
@@ -99,6 +109,9 @@
                     }
                 ],
                 "operationId": "convert",
+			    "tags": [
+					"convert"
+				],
                 "responses": {
                     "200": {
                         "description": "default"
@@ -121,6 +134,9 @@
                     }
                 ],
                 "operationId": "validateUrl",
+			    "tags": [
+					"validate"
+				],
                 "responses": {
                     "200": {
                         "description": "default"
@@ -147,6 +163,9 @@
                     }
                 ],
                 "operationId": "validate",
+			    "tags": [
+					"validate"
+				],
                 "responses": {
                     "200": {
                         "description": "default"
@@ -169,6 +188,9 @@
                     }
                 ],
                 "operationId": "getBadge",
+			    "tags": [
+					"validate"
+				],
                 "responses": {
                     "301": {
                         "description": "Moved"
