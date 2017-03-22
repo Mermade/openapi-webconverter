@@ -63,6 +63,11 @@ app.get('/contract/:spec.json',function(req,res){
 
 app.use("/",  express.static(__dirname));
 
+app.head('/api/v1/status',function(req,res){
+	res.set('Content-Type', 'application/json');
+	res.set('Access-Control-Allow-Origin','*');
+	res.end();
+});
 app.get('/api/v1/status',function(req,res){
 	res.set('Content-Type', 'application/json');
 	res.set('Access-Control-Allow-Origin','*');
