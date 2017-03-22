@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "Swagger2OpenAPI Converter",
-        "version": "1.0",
+        "version": "1.0.0",
         "contact": {
             "name": "Mike Ralphson",
             "email": "mike.ralphson@gmail.com",
