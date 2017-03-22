@@ -23,7 +23,9 @@
     "description": "Converter and validator for Swagger 2.0 to OpenAPI 3.0.x definitions",
     "termsOfService": "https://opensource.org/licenses/MIT"
   },
-  "externalDocs": {},
+  "externalDocs": {
+	"url": "https://github.com/mermade/openapi-webconverter"
+  },
   "security": [],
   "tags": [
     {

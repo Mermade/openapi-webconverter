@@ -1,4 +1,4 @@
-#Online Swagger 2.0 to OpenAPI 3.0.x converter
+# Online Swagger 2.0 to OpenAPI 3.0.x converter
 
 [Convert](https://openapi-converter.herokuapp.com) Swagger 2.0 definitions or [validate](https://openapi-converter.herokuapp.com) OpenAPI 3.0.x definitions
 
