@@ -65,6 +65,7 @@ app.use("/",  express.static(__dirname));
 
 app.get('/api/v1/status',function(req,res){
 	res.set('Content-Type', 'application/json');
+	res.set('Access-Control-Allow-Origin','*');
 	res.send(JSON.stringify(status,null,2));
 });
 
