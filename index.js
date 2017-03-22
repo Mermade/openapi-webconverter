@@ -106,6 +106,7 @@ function validate(req, res, badge) {
 			}
 			else {
 				res.set('Content-Type', 'application/json');
+				res.set('Access-Control-Allow-Origin','*');
 	 			res.send(JSON.stringify(result,null,2));
 			}
 		});
@@ -151,6 +152,7 @@ app.post('/api/v1/validate', upload.single('filename'), function(req,res){
 		result.context = options.context.pop();
 	}
 	res.set('Content-Type',payload.contentType);
+	res.set('Access-Control-Allow-Origin','*');
 	if (payload.yaml) {
 		res.send(payload.prefix+yaml.safeDump(result));
 	}
@@ -186,6 +188,7 @@ app.get('/api/v1/convert', function(req,res) {
 				}
 				result.message = ex.message;
 			}
+			res.set('Access-Control-Allow-Origin','*');
 			if (payload.yaml) {
 				res.set('Content-Type','text/yaml');
 				res.send(yaml.safeDump(result));
@@ -197,6 +200,7 @@ app.get('/api/v1/convert', function(req,res) {
 		});
 	}
 	else {
+		res.set('Access-Control-Allow-Origin','*');
 		result.message = 'You must provide a URL parameter';
 		res.set('Content-Type', 'application/json');
 		res.send(JSON.stringify(result,null,2));
@@ -237,6 +241,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 		}
 		result.message = ex.message;
 	}
+	res.set('Access-Control-Allow-Origin','*');
 	res.set('Content-Type',payload.contentType);
 	if (payload.yaml) {
 		res.send(payload.prefix+yaml.safeDump(result));
