@@ -1,3 +1,4 @@
+var fs = require('fs');
 var path = require('path');
 var util = require('util');
 
@@ -50,9 +51,17 @@ app.engine('html', ejs.renderFile);
 
 app.get('/', function(req,res) { res.render(path.join(__dirname,'index.html'),status) });
 app.get('*.html', function(req,res) { res.render(path.join(__dirname,req.path,status)) });
-app.use("/",  express.static(__dirname));
 app.use("/examples/",  express.static(path.join(__dirname,'examples')));
-app.use("/contract/",  express.static(path.join(__dirname,'contract')));
+
+app.get('/contract/:spec.json',function(req,res){
+	res.set('Content-Type', 'application/json');
+	res.set('Access-Control-Allow-Origin','*');
+	fs.readFile(path.join(__dirname,'contract',req.params.spec+'.json'),'utf8',function(err,data){
+		res.send(data);
+	});
+});
+
+app.use("/",  express.static(__dirname));
 
 app.get('/api/v1/status',function(req,res){
 	res.set('Content-Type', 'application/json');

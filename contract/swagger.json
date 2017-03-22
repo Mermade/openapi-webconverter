@@ -25,7 +25,7 @@
     "consumes": [
         "application/json",
         "text/yaml",
-        "multipart/formdata"
+        "multipart/form-data"
     ],
     "produces": [
         "application/json",
