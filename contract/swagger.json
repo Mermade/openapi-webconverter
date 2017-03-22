@@ -37,15 +37,15 @@
     "tags": [
         {
             "name": "metadata",
-            "description": "Metadata"
+            "description": "Metadata functions"
         },
         {
             "name": "conversion",
-            "description": "Conversion"
+            "description": "Conversion functions"
         },
         {
             "name": "validation",
-            "description": "Validation"
+            "description": "Validation functions"
         }
     ],
     "paths": {
@@ -72,7 +72,7 @@
                 "parameters": [],
                 "operationId": "convertUrl",
 			    "tags": [
-					"convert"
+					"conversion"
 				],
                 "responses": {
                     "200": {
@@ -110,7 +110,7 @@
                 ],
                 "operationId": "convert",
 			    "tags": [
-					"convert"
+					"conversion"
 				],
                 "responses": {
                     "200": {
@@ -135,7 +135,7 @@
                 ],
                 "operationId": "validateUrl",
 			    "tags": [
-					"validate"
+					"validation"
 				],
                 "responses": {
                     "200": {
@@ -164,7 +164,7 @@
                 ],
                 "operationId": "validate",
 			    "tags": [
-					"validate"
+					"validation"
 				],
                 "responses": {
                     "200": {
@@ -189,7 +189,7 @@
                 ],
                 "operationId": "getBadge",
 			    "tags": [
-					"validate"
+					"validation"
 				],
                 "responses": {
                     "301": {

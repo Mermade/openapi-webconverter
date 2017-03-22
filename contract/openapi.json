@@ -29,12 +29,16 @@
   "security": [],
   "tags": [
     {
+      "name": "metadata",
+      "description": "Metadata functions"
+	},
+    {
       "name": "conversion",
-      "description": "Conversion"
+      "description": "Conversion functions"
     },
     {
       "name": "validation",
-      "description": "Validation"
+      "description": "Validation functions"
     }
   ],
   "paths": {
@@ -44,6 +48,9 @@
         "description": "",
         "parameters": [],
         "operationId": "getStatus",
+		"tags": [
+			"metadata"
+		],
         "responses": {
           "200": {
             "description": "default"
@@ -57,6 +64,10 @@
         "description": "",
         "parameters": [],
         "operationId": "convertUrl",
+		"tags": [
+			"conversion"
+		],
+        "responses": {
         "responses": {
           "200": {
             "description": "default"
@@ -68,6 +79,10 @@
         "description": "",
         "parameters": [],
         "operationId": "convert",
+		"tags": [
+			"conversion"
+		],
+        "responses": {
         "responses": {
           "200": {
             "description": "default"
@@ -120,6 +135,10 @@
           }
         ],
         "operationId": "validateUrl",
+		"tags": [
+			"validation"
+		],
+        "responses": {
         "responses": {
           "200": {
             "description": "default"
@@ -131,6 +150,9 @@
         "description": "",
         "parameters": [],
         "operationId": "validate",
+		"tags": [
+			"validation"
+		],
         "responses": {
           "200": {
             "description": "default"
@@ -176,6 +198,9 @@
           }
         ],
         "operationId": "getBadge",
+		"tags": [
+			"validation"
+		],
         "responses": {
           "301": {
             "description": "Moved"
