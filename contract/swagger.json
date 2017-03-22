@@ -19,8 +19,8 @@
 		"url": "https://github.com/mermade/openapi-webconverter"
 	},
     "schemes": [
-        "http",
-        "https"
+        "https",
+        "http"
     ],
     "consumes": [
         "application/json",

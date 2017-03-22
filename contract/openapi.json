@@ -2,10 +2,10 @@
   "openapi": "3.0.0-RC0",
   "servers": [
     {
-      "url": "http://openapi-converter.herokuapp.com/api/v1"
+      "url": "https://openapi-converter.herokuapp.com/api/v1"
     },
     {
-      "url": "https://openapi-converter.herokuapp.com/api/v1"
+      "url": "http://openapi-converter.herokuapp.com/api/v1"
     }
   ],
   "info": {
@@ -68,7 +68,6 @@
 			"conversion"
 		],
         "responses": {
-        "responses": {
           "200": {
             "description": "default"
           }
@@ -82,7 +81,6 @@
 		"tags": [
 			"conversion"
 		],
-        "responses": {
         "responses": {
           "200": {
             "description": "default"
@@ -138,7 +136,6 @@
 		"tags": [
 			"validation"
 		],
-        "responses": {
         "responses": {
           "200": {
             "description": "default"
