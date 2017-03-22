@@ -173,6 +173,7 @@ app.get('/api/v1/convert', function(req,res) {
 			var obj = getObj(body,payload);
 			var options = {};
 			options.origin = req.query.url;
+			options.patch = true;
 			try {
 				result = converter.convert(obj,options);
 				if (req.params.validate) {
@@ -226,6 +227,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 	}
 	var obj = getObj(body,payload);
 	var options = {};
+	options.patch = true;
 	try {
 		result = converter.convert(obj,options);
 		if (validate) {
