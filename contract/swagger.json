@@ -23,7 +23,7 @@
     "consumes": [
         "application/json",
         "text/yaml",
-        "application/x-www-formurlencoded"
+        "multipart/formdata"
     ],
     "produces": [
         "application/json",
