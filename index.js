@@ -90,7 +90,7 @@ function validate(req, res, badge) {
 			var obj = getObj(body,payload);
 			var options = {};
 			try {
-				result.status = validator.validate(obj,options);
+				result.status = validator.validateSync(obj,options);
 			}
 			catch(ex) {
 				result.message = ex.message;
@@ -145,7 +145,7 @@ app.post('/api/v1/validate', upload.single('filename'), function(req,res){
 	var obj = getObj(body,payload);
 	var options = {};
 	try {
-		result.status = validator.validate(obj,options);
+		result.status = validator.validateSync(obj,options);
 	}
 	catch(ex) {
 		result.message = ex.message;
@@ -165,6 +165,7 @@ app.get('/api/v1/convert', function(req,res) {
 	status.conversions++;
 	result = {};
 	result.status = false;
+	res.set('Access-Control-Allow-Origin','*');
 	if (req.query.url) {
 		fetch(req.query.url).then(function(res) {
  	 		return res.text();
@@ -175,43 +176,63 @@ app.get('/api/v1/convert', function(req,res) {
 			options.origin = req.query.url;
 			options.patch = true;
 			try {
-				result = converter.convert(obj,options);
-				if (req.params.validate) {
-					status.validations++;
-					validator.validate(result,options);
-				}
+				converter.convert(obj,options,function(err,openapi,options){
+					result = openapi;
+					if (req.query.validate) {
+						status.validations++;
+						try {
+							result = {};
+							result.status = validator.validateSync(openapi,options);
+						}
+						catch (ex) {
+							result.status = false; // reset
+							if (options.context) {
+								result.context = options.context.pop();
+							}
+							result.message = ex.message;
+						}
+					}
+					if (payload.yaml) {
+						res.set('Content-Type','text/yaml');
+						res.send(yaml.safeDump(result));
+					}
+					else {
+						res.set('Content-Type', 'application/json');
+						res.send(JSON.stringify(result,null,2));
+					}
+
+				});
 			}
-			catch(ex) {
-				if (result.context) {
-					result = {};
-					result.status = false; // reset
-					result.context = options.context.pop();
-				}
+			catch (ex) {
 				result.message = ex.message;
-			}
-			res.set('Access-Control-Allow-Origin','*');
-			if (payload.yaml) {
-				res.set('Content-Type','text/yaml');
-				res.send(yaml.safeDump(result));
-			}
-			else {
 				res.set('Content-Type', 'application/json');
-	 			res.send(JSON.stringify(result,null,2));
+				res.send(JSON.stringify(result,null,2));
 			}
 		});
 	}
 	else {
-		res.set('Access-Control-Allow-Origin','*');
 		result.message = 'You must provide a URL parameter';
 		res.set('Content-Type', 'application/json');
 		res.send(JSON.stringify(result,null,2));
 	}
 });
 
+function finishConversion(res,result,payload){
+	res.set('Access-Control-Allow-Origin','*');
+	res.set('Content-Type',payload.contentType);
+	if (payload.yaml) {
+		res.send(payload.prefix+yaml.safeDump(result));
+	}
+	else {
+		res.send(payload.prefix+JSON.stringify(result,null,2));
+	}
+}
+
 app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 	status.conversions++;
 	var result = {};
 	result.status = false;
+
 	var body = (req.body ? req.body.source : '')||(req.file ? req.file.buffer.toString() : '');
 	var validate = (req.body && req.body.validate); // on or undefined
 	var payload = {};
@@ -229,27 +250,33 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 	var options = {};
 	options.patch = true;
 	try {
-		result = converter.convert(obj,options);
-		if (validate) {
-			status.validations++;
-			validator.validate(result,options);
-		}
+		converter.convert(obj,options,function(err,openapi,options){
+			if (err) {
+				result.message = err.message||'no message';
+			}
+			else {
+				result = openapi;
+			}
+			if (validate) {
+				status.validations++;
+				try {
+					result = {};
+					result.status = validator.validateSync(openapi,options);
+				}
+				catch (ex) {
+					result.message = ex.message;
+					if (options.context) {
+						result.context = options.context.pop();
+					}
+				}
+			}
+			finishConversion(res,result,payload);
+
+		});
 	}
 	catch(ex) {
-		if (options.context) {
-			result = {};
-			result.status = false;
-			result.context = options.context.pop();
-		}
 		result.message = ex.message;
-	}
-	res.set('Access-Control-Allow-Origin','*');
-	res.set('Content-Type',payload.contentType);
-	if (payload.yaml) {
-		res.send(payload.prefix+yaml.safeDump(result));
-	}
-	else {
-		res.send(payload.prefix+JSON.stringify(result,null,2));
+		finishConversion(res,result,payload);
 	}
 });
 
