@@ -176,13 +176,13 @@ app.get('/api/v1/convert', function(req,res) {
 			options.origin = req.query.url;
 			options.patch = true;
 			try {
-				converter.convert(obj,options,function(err,openapi,options){
-					result = openapi;
+				converter.convert(obj,options,function(err,options){
+					result = options.openapi;
 					if (req.query.validate) {
 						status.validations++;
 						try {
 							result = {};
-							result.status = validator.validateSync(openapi,options);
+							result.status = validator.validateSync(options.openapi,options);
 						}
 						catch (ex) {
 							result.status = false; // reset
@@ -250,22 +250,22 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 	var options = {};
 	options.patch = true;
 	try {
-		converter.convert(obj,options,function(err,openapi,options){
+		converter.convert(obj,options,function(err,options){
 			if (err) {
 				result.message = err.message||'no message';
 			}
 			else {
-				result = openapi;
+				result = options.openapi;
 			}
 			if (validate) {
 				status.validations++;
 				try {
 					result = {};
-					result.status = validator.validateSync(openapi,options);
+					result.status = validator.validateSync(options.openapi,options);
 				}
 				catch (ex) {
 					result.message = ex.message;
-					if (options.context) {
+					if (options && options.context) {
 						result.context = options.context.pop();
 					}
 				}
