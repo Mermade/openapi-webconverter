@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0-RC0",
+  "openapi": "3.0.0-rc2",
   "servers": [
     {
       "url": "https://openapi-converter.herokuapp.com/api/v1"
@@ -24,14 +24,14 @@
     "termsOfService": "https://opensource.org/licenses/MIT"
   },
   "externalDocs": {
-	"url": "https://github.com/mermade/openapi-webconverter"
+    "url": "https://github.com/mermade/openapi-webconverter"
   },
   "security": [],
   "tags": [
     {
       "name": "metadata",
       "description": "Metadata functions"
-	},
+    },
     {
       "name": "conversion",
       "description": "Conversion functions"
@@ -47,10 +47,10 @@
         "summary": "Get the status of the API",
         "description": "",
         "parameters": [],
+        "tags": [
+          "metadata"
+        ],
         "operationId": "getStatus",
-		"tags": [
-			"metadata"
-		],
         "responses": {
           "200": {
             "description": "default"
@@ -64,9 +64,9 @@
         "description": "",
         "parameters": [],
         "operationId": "convertUrl",
-		"tags": [
-			"conversion"
-		],
+        "tags": [
+          "conversion"
+        ],
         "responses": {
           "200": {
             "description": "default"
@@ -78,9 +78,9 @@
         "description": "",
         "parameters": [],
         "operationId": "convert",
-		"tags": [
-			"conversion"
-		],
+        "tags": [
+          "conversion"
+        ],
         "responses": {
           "200": {
             "description": "default"
@@ -94,20 +94,17 @@
                 "properties": {
                   "filename": {
                     "description": "The file to upload and convert",
-                    "type": "string",
-                    "required": false
+                    "type": "string"
                   },
                   "source": {
                     "description": "The text of a Swagger 2.0 definition to convert",
-                    "type": "string",
-                    "required": false
+                    "type": "string"
                   },
                   "validate": {
                     "type": "string",
                     "enum": [
                       "on"
-                    ],
-                    "required": false
+                    ]
                   }
                 }
               }
@@ -133,9 +130,9 @@
           }
         ],
         "operationId": "validateUrl",
-		"tags": [
-			"validation"
-		],
+        "tags": [
+          "validation"
+        ],
         "responses": {
           "200": {
             "description": "default"
@@ -147,9 +144,9 @@
         "description": "",
         "parameters": [],
         "operationId": "validate",
-		"tags": [
-			"validation"
-		],
+        "tags": [
+          "validation"
+        ],
         "responses": {
           "200": {
             "description": "default"
@@ -163,13 +160,11 @@
                 "properties": {
                   "filename": {
                     "description": "The file to upload and validate",
-                    "type": "string",
-                    "required": false
+                    "type": "string"
                   },
                   "source": {
                     "description": "The text of an OpenAPI 3.0.x definition to validate",
-                    "type": "string",
-                    "required": false
+                    "type": "string"
                   }
                 }
               }
@@ -195,9 +190,9 @@
           }
         ],
         "operationId": "getBadge",
-		"tags": [
-			"validation"
-		],
+        "tags": [
+          "validation"
+        ],
         "responses": {
           "301": {
             "description": "Moved"

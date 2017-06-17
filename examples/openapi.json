@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0-RC1",
+  "openapi": "3.0.0-rc2",
   "servers": [
     {
       "url": "http://petstore.swagger.io/v2"
@@ -12,7 +12,7 @@
       "version": "2.0",
       "converter": {
         "url": "https://github.com/mermade/swagger2openapi",
-        "version": "1.2.1"
+        "version": "2.2.0"
       }
     }
   ],
@@ -75,7 +75,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/requestBody1"
+          "$ref": "#/components/requestBodies/Pet"
         }
       },
       "put": {
@@ -106,7 +106,7 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/requestBody1"
+          "$ref": "#/components/requestBodies/Pet"
         }
       }
     },
@@ -124,6 +124,7 @@
             "in": "query",
             "description": "Status values that need to be considered for filter",
             "required": true,
+            "explode": true,
             "schema": {
               "type": "array",
               "items": {
@@ -188,6 +189,7 @@
             "in": "query",
             "description": "Tags to filter by",
             "required": true,
+            "explode": true,
             "schema": {
               "type": "array",
               "items": {
@@ -322,13 +324,11 @@
                 "properties": {
                   "name": {
                     "description": "Updated name of the pet",
-                    "type": "string",
-                    "required": false
+                    "type": "string"
                   },
                   "status": {
                     "description": "Updated status of the pet",
-                    "type": "string",
-                    "required": false
+                    "type": "string"
                   }
                 }
               }
@@ -497,12 +497,13 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "description": "order placed for purchasing the pet",
               "schema": {
                 "$ref": "#/components/schemas/Order"
               }
             }
-          }
+          },
+          "description": "order placed for purchasing the pet",
+          "required": true
         }
       }
     },
@@ -599,12 +600,13 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "description": "Created user object",
               "schema": {
                 "$ref": "#/components/schemas/User"
               }
             }
-          }
+          },
+          "description": "Created user object",
+          "required": true
         }
       }
     },
@@ -623,7 +625,7 @@
           }
         },
         "requestBody": {
-          "$ref": "#/components/requestBodies/requestBody2"
+          "$ref": "#/components/requestBodies/UserArray"
         }
       }
     },
@@ -642,7 +644,7 @@
           }
         },
         "requestBody": {
-          "$ref": "#/components/requestBodies/requestBody2"
+          "$ref": "#/components/requestBodies/UserArray"
         }
       }
     },
@@ -801,12 +803,13 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "description": "Updated user object",
               "schema": {
                 "$ref": "#/components/schemas/User"
               }
             }
-          }
+          },
+          "description": "Updated user object",
+          "required": true
         }
       },
       "delete": {
@@ -1018,26 +1021,25 @@
     "parameters": {},
     "examples": {},
     "requestBodies": {
-      "requestBody1": {
+      "Pet": {
         "content": {
           "application/json": {
-            "description": "Pet object that needs to be added to the store",
             "schema": {
               "$ref": "#/components/schemas/Pet"
             }
           },
           "application/xml": {
-            "description": "Pet object that needs to be added to the store",
             "schema": {
               "$ref": "#/components/schemas/Pet"
             }
           }
-        }
+        },
+        "description": "Pet object that needs to be added to the store",
+        "required": true
       },
-      "requestBody2": {
+      "UserArray": {
         "content": {
           "application/json": {
-            "description": "List of user object",
             "schema": {
               "type": "array",
               "items": {
@@ -1045,7 +1047,9 @@
               }
             }
           }
-        }
+        },
+        "description": "List of user object",
+        "required": true
       }
     },
     "securitySchemes": {
