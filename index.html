@@ -111,7 +111,7 @@ alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribb
 			<p>
 			Swagger2OpenAPI version <%= s2oVersion %> tracks the <%= targetVersion %> version of the 
 			<a href="https://github.com/OAI/OpenAPI-Specification">OpenAPI Specification</a>
-			<% if (targetVersion.indexOf('RC')>=0) { %>
+			<% if (targetVersion.toLowerCase().indexOf('rc')>=0) { %>
 			<p>
 			<b>Warning:</b> This is a Release Candidate version of the specification and changes may be made before the final release, 
 			and Swagger2OpenAPI may be in flux tracking these changes.
