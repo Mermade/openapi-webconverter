@@ -12,7 +12,7 @@ You may also use the [API](http://petstore.swagger.io/?url=https://openapi-conve
    <li><i>GET</i> <a href="https://openapi-converter.herokuapp.com/api/v1/status">/api/v1/status</a></li>
    <li><i>GET</i> <b>/api/v1/convert?url=...</b> optionally with a <b>validate</b> parameter</li>
    <li><i>GET</i> <b>/api/v1/validate?url=...</b></li>
-   <li><i>GET</i> <b>/api/v1/badge?url=...</b> returns a redirect</li>
+   <li><i>GET</i> <b>/api/v1/badge?url=...</b> returns a redirect to an SVG badge</li>
 </ul>
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
