@@ -21,6 +21,7 @@ var status = {};
 status.startTime = new Date();
 status.conversions = 0;
 status.validations = 0;
+status.badges = 0;
 status.targetVersion = converter.targetVersion;
 status.s2oVersion = s2oVersion;
 status.self = require('./package.json');
@@ -97,6 +98,7 @@ function validate(req, res, badge) {
 				result.context = options.context.pop();
 			}
 			if (badge) {
+				status.badges++;
 				if (result.status) {
 					res.redirect('https://img.shields.io/badge/OpenAPI3-Valid-brightgreen.svg');
 				}
