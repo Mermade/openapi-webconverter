@@ -137,12 +137,16 @@ app.post('/api/v1/validate', upload.single('filename'), function(req,res){
 	payload.prefix = '<html><body><pre>';
 	payload.contentType = 'text/html';
 
-	if ((req.headers.accept == 'application/json') || (req.headers.accept.endsWith('yaml'))) {
+	if (req.headers.accept.startsWith('application/json')) {
 		payload.prefix = '';
-		payload.contentType = req.headers.accept;
+		payload.contentType = 'application/json';
 	}
-	if (req.headers['content-type'] == 'application/x-www-form-urlencoded') {
-		result.warning = 'Your browser sent the wrong Content-Type header. Try pasting your document';
+	if (req.headers.accept.indexOf('yaml')>=0) {
+		payload.prefix = '';
+		payload.contentType = 'text/yaml';
+	}
+	if (req.headers['content-type'].startsWith('application/x-www-form-urlencoded')) {
+		result.warning = 'Your client sent the wrong Content-Type header. Try pasting your document';
 	}
 	var obj = getObj(body,payload);
 	var options = {};
@@ -241,12 +245,16 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 	payload.prefix = '<html><body><pre>';
 	payload.contentType = 'text/html';
 
-	if ((req.headers.accept == 'application/json') || (req.headers.accept.endsWith('yaml'))) {
+	if (req.headers.accept.startsWith('application/json')) {
 		payload.prefix = '';
-		payload.contentType = req.headers.accept;
+		payload.contentType = 'application/json';
 	}
-	if (req.headers['content-type'] == 'application/x-www-form-urlencoded') {
-		result.warning = 'Your browser sent the wrong Content-Type header. Try pasting your document';
+	if (req.headers.accept.indexOf('yaml')>=0) {
+		payload.prefix = '';
+		payload.contentType = 'text/yaml';
+	}
+	if (req.headers['content-type'].startsWith('application/x-www-form-urlencoded')) {
+		result.warning = 'Your client sent the wrong Content-Type header. Try pasting your document';
 	}
 	var obj = getObj(body,payload);
 	var options = {};
