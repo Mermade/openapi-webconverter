@@ -3,6 +3,12 @@
   "version": "1.2.1",
   "description": "Online converter/validator from Swagger 2.0 to OpenAPI 3.0.0",
   "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "^6.4.0"
+  },
   "repository": {
     "url": "https://github.com/Mermade/openapi-webconverter.git",
     "type": "git"
