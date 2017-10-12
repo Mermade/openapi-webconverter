@@ -4,7 +4,8 @@
   "description": "Online converter/validator from Swagger 2.0 to OpenAPI 3.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "npx dredd"
   },
   "engines": {
     "node": "^6.4.0"
@@ -30,5 +31,8 @@
     "multer": "^1.3.0",
     "node-fetch": "^1.6.3",
     "swagger2openapi": "^2.6.8"
+  },
+  "devDependencies": {
+    "dredd": "^4.5.0"
   }
 }

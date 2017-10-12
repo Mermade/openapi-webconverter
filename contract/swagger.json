@@ -69,7 +69,17 @@
             "get": {
                 "summary": "Convert a Swagger 2.0 definition to OpenAPI 3.0.x from a URL",
                 "description": "",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "description": "The URL to retrieve the OpenAPI 2.0 definition from",
+                        "format": "uri",
+			"x-example": "https://openapi-converter.herokuapp.com/contract/swagger.yaml"
+                    }
+		],
                 "operationId": "convertUrl",
 			    "tags": [
 					"conversion"
@@ -130,7 +140,8 @@
                         "required": true,
                         "type": "string",
                         "description": "The URL to retrieve the OpenAPI 3.0.x definition from",
-                        "format": "uri"
+                        "format": "uri",
+			"x-example": "https://openapi-converter.herokuapp.com/contract/openapi.yaml"
                     }
                 ],
                 "operationId": "validateUrl",
@@ -184,7 +195,8 @@
                         "required": true,
                         "type": "string",
                         "description": "The URL to retrieve the OpenAPI 3.0.x definition from",
-                        "format": "uri"
+                        "format": "uri",
+			"x-example": "https://openapi-converter.herokuapp.com/contract/openapi.yaml"
                     }
                 ],
                 "operationId": "getBadge",
