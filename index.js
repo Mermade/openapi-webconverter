@@ -235,7 +235,7 @@ app.get('/api/v1/convert', function(req,res) {
 function finishConversion(res,result,payload){
 	res.set('Access-Control-Allow-Origin','*');
 	res.set('Content-Type',payload.contentType);
-	if (payload.responseYaml) {
+	if (payload.yamlResponse) {
 		res.send(payload.prefix+yaml.safeDump(result));
 		return;
 	}
