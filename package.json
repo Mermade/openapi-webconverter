@@ -1,6 +1,6 @@
 {
   "name": "openapi-webconverter",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Online converter/validator from Swagger 2.0 to OpenAPI 3.0.0",
   "main": "index.js",
   "scripts": {
@@ -15,6 +15,12 @@
     "type": "git"
   },
   "author": "Mike Ralphson <mike.ralphson@gmail.com>",
+  "contributors": [
+    {
+      "name": "Szabolcs (Szasza) Palmer",
+      "email": "szasza@szasza.info"
+    }
+  ],
   "license": "BSD-3-Clause",
   "dependencies": {
     "body-parser": "^1.17.1",
