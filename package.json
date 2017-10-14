@@ -1,6 +1,6 @@
 {
   "name": "openapi-webconverter",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Online converter/validator from Swagger 2.0 to OpenAPI 3.0.0",
   "main": "index.js",
   "scripts": {
