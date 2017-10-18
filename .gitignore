@@ -1,4 +1,5 @@
 node_modules/
+contract/min*
 log.sh
 issue.md
 .idea/

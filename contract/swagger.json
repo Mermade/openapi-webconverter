@@ -16,20 +16,19 @@
         "termsOfService": "https://opensource.org/licenses/MIT"
     },
     "externalDocs": {
-		"url": "https://github.com/mermade/openapi-webconverter"
-	},
+        "url": "https://github.com/mermade/openapi-webconverter"
+    },
     "schemes": [
         "https",
         "http"
     ],
     "consumes": [
         "application/json",
-        "text/yaml",
-        "multipart/form-data"
+        "application/x-yaml"
     ],
     "produces": [
         "application/json",
-        "text/yaml"
+        "application/x-yaml"
     ],
     "security": [],
     "host": "openapi-converter.herokuapp.com",
@@ -54,13 +53,14 @@
                 "summary": "Get the status of the API",
                 "description": "",
                 "parameters": [],
-			    "tags": [
-					"metadata"
-				],
+                "tags": [
+                  "metadata"
+                ],
                 "operationId": "getStatus",
                 "responses": {
                     "200": {
-                        "description": "default"
+                        "description": "default",
+                        "schema": {}
                     }
                 }
             }
@@ -77,36 +77,42 @@
                         "type": "string",
                         "description": "The URL to retrieve the OpenAPI 2.0 definition from",
                         "format": "uri",
-			"x-example": "https://openapi-converter.herokuapp.com/contract/swagger.yaml"
+            "x-example": "https://openapi-converter.herokuapp.com/contract/swagger.json"
                     }
-		],
+        ],
                 "operationId": "convertUrl",
-			    "tags": [
-					"conversion"
-				],
+                "tags": [
+                    "conversion"
+                ],
                 "responses": {
                     "200": {
-                        "description": "default"
+                        "description": "default",
+                        "schema": {}
                     }
                 }
             },
             "post": {
                 "summary": "Convert a Swagger 2.0 definition passed in the body to OpenAPI 3.0.x ",
                 "description": "",
+                "consumes": [
+                    "multipart/form-data"
+                ],
                 "parameters": [
                     {
                         "name": "filename",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "The file to upload and convert"
+                        "description": "The file to upload and convert",
+                        "x-example": ""
                     },
                     {
                         "name": "source",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "The text of a Swagger 2.0 definition to convert"
+                        "description": "The text of a Swagger 2.0 definition to convert",
+                        "x-example": "swagger: 2.0\ninfo:\n  title: API\n  version: 1.0.0\n"
                     },
                     {
                         "name": "validate",
@@ -115,16 +121,22 @@
                         "type": "string",
                         "enum": [
                             "on"
-                        ]
+                        ],
+                        "x-example": ""
                     }
                 ],
                 "operationId": "convert",
-			    "tags": [
-					"conversion"
-				],
+                "tags": [
+                    "conversion"
+                ],
                 "responses": {
                     "200": {
-                        "description": "default"
+                        "description": "default",
+                        "schema": {}
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {}
                     }
                 }
             }
@@ -141,20 +153,24 @@
                         "type": "string",
                         "description": "The URL to retrieve the OpenAPI 3.0.x definition from",
                         "format": "uri",
-			"x-example": "https://openapi-converter.herokuapp.com/contract/openapi.yaml"
+            "x-example": "https://openapi-converter.herokuapp.com/contract/openapi.json"
                     }
                 ],
                 "operationId": "validateUrl",
-			    "tags": [
-					"validation"
-				],
+                "tags": [
+                    "validation"
+                ],
                 "responses": {
                     "200": {
-                        "description": "default"
+                        "description": "default",
+                        "schema": {}
                     }
                 }
             },
             "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
                 "summary": "Validate an OpenAPI 3.0.x definition supplied in the body of the request",
                 "description": "",
                 "parameters": [
@@ -163,23 +179,30 @@
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "The file to upload and validate"
+                        "description": "The file to upload and validate",
+                        "x-example": ""
                     },
                     {
                         "name": "source",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "The text of an OpenAPI 3.0.x definition to validate"
+                        "description": "The text of an OpenAPI 3.0.x definition to validate",
+                        "x-example": "openapi: 3.0.0\ninfo:\n  title: API\n  version: 1.0.0\npaths: {}\n"
                     }
                 ],
                 "operationId": "validate",
-			    "tags": [
-					"validation"
-				],
+                "tags": [
+                    "validation"
+                ],
                 "responses": {
                     "200": {
-                        "description": "default"
+                        "description": "default",
+                        "schema": {}
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "schema": {}
                     }
                 }
             }
@@ -196,13 +219,13 @@
                         "type": "string",
                         "description": "The URL to retrieve the OpenAPI 3.0.x definition from",
                         "format": "uri",
-			"x-example": "https://openapi-converter.herokuapp.com/contract/openapi.yaml"
+            "x-example": "https://openapi-converter.herokuapp.com/contract/openapi.json"
                     }
                 ],
                 "operationId": "getBadge",
-			    "tags": [
-					"validation"
-				],
+                "tags": [
+                    "validation"
+                ],
                 "responses": {
                     "301": {
                         "description": "Moved"
