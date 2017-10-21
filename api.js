@@ -288,6 +288,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 module.exports = {
     api : {
         app : app,
+        upload, upload,
         status: status
     }
 };
