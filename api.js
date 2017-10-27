@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var util = require('util');
+var url = require('url');
 
 var express = require('express');
 var compression = require('compression');
@@ -115,13 +116,20 @@ app.get('/api/v1/status',function(req,res){
     sendObj(res,payload,status);
 });
 
+function superfetch(u) {
+    let up = url.parse(u);
+    if (u.protocol) return fetch(u);
+    let data = fs.readFileSync(path.join(__dirname,u),'utf8');
+    return Promise.resolve({text:function(){return data}});
+}
+
 function validate(req, res, badge) {
     status.validations++;
     result = {};
     result.status = false;
     var payload = parseRequest(req);
     if (req.query.url) {
-        fetch(req.query.url).then(function(res) {
+        superfetch(req.query.url).then(function(res) {
               return res.text();
         }).then(function(body) {
             var obj = getObj(body,payload);
@@ -191,7 +199,7 @@ app.get('/api/v1/convert', function(req,res) {
     result = {};
     result.status = false;
     if (req.query.url) {
-        fetch(req.query.url).then(function(res) {
+        superfetch(req.query.url).then(function(res) {
               return res.text();
         }).then(function(body) {
             var payload = parseRequest(req);

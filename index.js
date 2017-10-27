@@ -7,6 +7,9 @@ var api = require('./api.js').api;
 var app = api.app;
 var status = api.status;
 
+// nice stack traces
+process.on('unhandledRejection', r => console.log(r));
+
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 
