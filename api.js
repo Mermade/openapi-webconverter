@@ -118,7 +118,7 @@ app.get('/api/v1/status',function(req,res){
 
 function superfetch(u) {
     let up = url.parse(u);
-    if (u.protocol) return fetch(u);
+    if (up.protocol) return fetch(u);
     let data = '{"openapi": "404"}';
     try {
         data = fs.readFileSync(path.join(__dirname,u),'utf8');
