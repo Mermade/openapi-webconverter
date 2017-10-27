@@ -119,7 +119,13 @@ app.get('/api/v1/status',function(req,res){
 function superfetch(u) {
     let up = url.parse(u);
     if (u.protocol) return fetch(u);
-    let data = fs.readFileSync(path.join(__dirname,u),'utf8');
+    let data = '{"openapi": "404"}';
+    try {
+        data = fs.readFileSync(path.join(__dirname,u),'utf8');
+    }
+    catch (ex) {
+        console.warn(ex.message);
+    }
     return Promise.resolve({text:function(){return data}});
 }
 
@@ -204,14 +210,14 @@ app.get('/api/v1/convert', function(req,res) {
         }).then(function(body) {
             var payload = parseRequest(req);
             var obj = getObj(body,payload);
-            var options = {};
+            var globalOptions = options = {};
             options.origin = req.query.url;
             options.patch = true;
             try {
                 converter.convert(obj,options,function(err,options){
                     if (err) {
-                        result.error = err;
-                        result.options = options;
+                        result.error = err.message;
+                        result.options = globalOptions;
                     }
                     else result = options.openapi;
                     if (req.query.validate) {
