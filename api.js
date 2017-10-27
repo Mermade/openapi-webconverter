@@ -104,6 +104,8 @@ app.get('/contract/:spec.yaml',function(req,res){
     });
 });
 
+app.get('/api', function(req,res) { res.render(path.join(__dirname,'index.html'),status) });
+
 app.get('/api/v1/status',function(req,res){
     let payload = parseRequest(req);
     sendObj(res,payload,status);
