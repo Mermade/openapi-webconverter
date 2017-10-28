@@ -77,7 +77,7 @@
                         "type": "string",
                         "description": "The URL to retrieve the OpenAPI 2.0 definition from",
                         "format": "uri",
-            "x-example": "https://openapi-converter.herokuapp.com/contract/swagger.json"
+                        "x-example": "https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/swagger.json"
                     }
         ],
                 "operationId": "convertUrl",
@@ -153,7 +153,7 @@
                         "type": "string",
                         "description": "The URL to retrieve the OpenAPI 3.0.x definition from",
                         "format": "uri",
-            "x-example": "https://openapi-converter.herokuapp.com/contract/openapi.json"
+                        "x-example": "https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/openapi.json"
                     }
                 ],
                 "operationId": "validateUrl",
@@ -219,7 +219,7 @@
                         "type": "string",
                         "description": "The URL to retrieve the OpenAPI 3.0.x definition from",
                         "format": "uri",
-            "x-example": "https://openapi-converter.herokuapp.com/contract/openapi.json"
+                        "x-example": "https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/openapi.json"
                     }
                 ],
                 "operationId": "getBadge",

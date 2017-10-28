@@ -75,7 +75,7 @@
                         "in": "query",
                         "required": true,
                         "description": "The URL to retrieve the OpenAPI 2.0 definition from",
-                        "example": "https://openapi-converter.herokuapp.com/contract/swagger.json",
+                        "example": "https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/swagger.json",
                         "schema": {
                             "type": "string",
                             "format": "uri"
@@ -168,7 +168,7 @@
                         "in": "query",
                         "required": true,
                         "description": "The URL to retrieve the OpenAPI 3.0.x definition from",
-                        "example": "https://openapi-converter.herokuapp.com/contract/openapi.json",
+                        "example": "https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/openapi.json",
                         "schema": {
                             "type": "string",
                             "format": "uri"
@@ -255,7 +255,7 @@
                         "in": "query",
                         "required": true,
                         "description": "The URL to retrieve the OpenAPI 3.0.x definition from",
-                        "example": "https://openapi-converter.herokuapp.com/contract/openapi.json",
+                        "example": "https://raw.githubusercontent.com/Mermade/openapi-webconverter/master/contract/openapi.json",
                         "schema": {
                             "type": "string",
                             "format": "uri"
