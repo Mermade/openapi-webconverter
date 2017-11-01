@@ -50,14 +50,16 @@ function parseRequest(req){
     payload.prefix = '<html><body><pre>';
     payload.contentType = 'text/html';
 
-    if (req.headers.accept.startsWith('application/json')) {
-        payload.prefix = '';
-        payload.contentType = 'application/json';
-    }
-    if (req.headers.accept.indexOf('yaml')>=0) {
-        payload.prefix = '';
-        payload.contentType = 'application/x-yaml';
-        payload.yamlResponse = true;
+    if (req.headers.accept) {
+        if (req.headers.accept.startsWith('application/json')) {
+            payload.prefix = '';
+            payload.contentType = 'application/json';
+        }
+        if (req.headers.accept.indexOf('yaml')>=0) {
+            payload.prefix = '';
+            payload.contentType = 'application/x-yaml';
+            payload.yamlResponse = true;
+        }
     }
 
     return payload;
@@ -145,6 +147,7 @@ function validate(req, res, badge) {
             }
             catch(ex) {
                 result.message = ex.message;
+                console.warn(ex);
                 result.context = options.context.pop();
             }
             if (badge) {
@@ -195,6 +198,7 @@ app.post('/api/v1/validate', upload.single('filename'), function(req,res){
     }
     catch(ex) {
         result.message = ex.message;
+        console.warn(ex);
         result.context = options.context.pop();
     }
     sendObj(res,payload,result);
@@ -232,6 +236,7 @@ app.get('/api/v1/convert', function(req,res) {
                                 result.context = options.context.pop();
                             }
                             result.message = ex.message;
+                            console.warn(ex);
                         }
                     }
 
@@ -240,6 +245,7 @@ app.get('/api/v1/convert', function(req,res) {
             }
             catch (ex) {
                 result.message = ex.message;
+                console.warn(ex);
                 sendObj(res,payload,result);
             }
         });
@@ -290,6 +296,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
                 }
                 catch (ex) {
                     result.message = ex.message;
+                    console.warn(ex);
                     if (options && options.context) {
                         result.context = options.context.pop();
                     }
@@ -301,6 +308,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
     }
     catch(ex) {
         result.message = ex.message;
+        console.warn(ex);
         finishConversion(res,result,payload);
     }
 });
