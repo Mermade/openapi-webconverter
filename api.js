@@ -1,21 +1,21 @@
-var fs = require('fs');
-var path = require('path');
-var util = require('util');
-var url = require('url');
+const fs = require('fs');
+const path = require('path');
+const util = require('util');
+const url = require('url');
 
-var express = require('express');
-var compression = require('compression');
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var storage = multer.memoryStorage();
-var upload = multer({ storage: storage });
-var fetch = require('node-fetch');
+const express = require('express');
+const compression = require('compression');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+const fetch = require('node-fetch');
 
-var yaml = require('js-yaml');
+const yaml = require('js-yaml');
 
-var converter = require('swagger2openapi');
-var validator = require('swagger2openapi/validate.js');
-var s2oVersion = require('swagger2openapi/common.js').getVersion();
+const converter = require('swagger2openapi');
+const validator = require('swagger2openapi/validate.js');
+const s2oVersion = require('swagger2openapi/common.js').getVersion();
 
 var status = {};
 status.startTime = new Date();
@@ -146,7 +146,7 @@ function validate(req, res, badge) {
                 result.status = validator.validateSync(obj,options);
             }
             catch(ex) {
-                result.message = ex.message;
+                result.message = ex.message||'No message';
                 console.warn(ex);
                 result.context = options.context.pop();
             }
