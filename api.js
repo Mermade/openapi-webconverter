@@ -208,11 +208,11 @@ app.get('/api/v1/convert', function(req,res) {
     status.conversions++;
     result = {};
     result.status = false;
+    var payload = parseRequest(req);
     if (req.query.url) {
         superfetch(req.query.url).then(function(res) {
               return res.text();
         }).then(function(body) {
-            var payload = parseRequest(req);
             var obj = getObj(body,payload);
             var globalOptions = options = {};
             options.origin = req.query.url;
