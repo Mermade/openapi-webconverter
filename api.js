@@ -141,7 +141,7 @@ function validate(req, res, badge) {
               return res.text();
         }).then(function(body) {
             var obj = getObj(body,payload);
-            var options = {};
+            var options = { resolve:true };
             try {
                 result.status = validator.validateSync(obj,options);
             }
@@ -191,7 +191,7 @@ app.post('/api/v1/validate', upload.single('filename'), function(req,res){
         if (!req.body.source && !req.file) payload.status = 200; // Dredd
     }
     var obj = getObj(body,payload);
-    var options = {};
+    var options = { resolve:true };
     try {
         result.status = validator.validateSync(obj,options);
         if (result.status === true) payload.status = 200;
@@ -217,6 +217,7 @@ app.get('/api/v1/convert', function(req,res) {
             var globalOptions = options = {};
             options.origin = req.query.url;
             options.patch = true;
+            options.resolve = true;
             try {
                 converter.convert(obj,options,function(err,options){
                     if (err) {
@@ -278,6 +279,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
     var obj = getObj(body,payload);
     var options = {};
     options.patch = true;
+    options.resolve = true;
     try {
         converter.convert(obj,options,function(err,options){
             if (err) {
