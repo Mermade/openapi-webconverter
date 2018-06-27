@@ -141,7 +141,7 @@ function validate(req, res, badge) {
               return res.text();
         }).then(function(body) {
             var obj = getObj(body,payload);
-            var options = { resolve:true };
+            var options = { source: req.query.url, resolve:true };
             try {
                 result.status = validator.validateSync(obj,options);
             }
@@ -215,7 +215,8 @@ app.get('/api/v1/convert', function(req,res) {
         }).then(function(body) {
             var obj = getObj(body,payload);
             var globalOptions = options = {};
-            options.origin = req.query.url;
+            options.origin = true;
+            options.source = req.query.url;
             options.patch = true;
             options.resolve = true;
             try {
