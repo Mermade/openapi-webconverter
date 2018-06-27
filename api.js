@@ -14,8 +14,8 @@ const fetch = require('node-fetch');
 const yaml = require('js-yaml');
 
 const converter = require('swagger2openapi');
-const validator = require('swagger2openapi/validate.js');
-const s2oVersion = require('swagger2openapi/common.js').getVersion();
+const validator = require('oas-validator');
+const s2oVersion = require('swagger2openapi/package.json').version;
 
 var status = {};
 status.startTime = new Date();
