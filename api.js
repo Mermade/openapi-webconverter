@@ -186,7 +186,7 @@ app.post('/api/v1/validate', upload.single('filename'), function(req,res){
     var payload = parseRequest(req);
 
     if (req.headers['content-type'].startsWith('application/x-www-form-urlencoded')) {
-        result.warning = 'Your client sent the wrong Content-Type header. Try pasting your document';
+        result.warning = `Your client sent the wrong Content-Type header (${req.headers['content-type']}). Try pasting your document`;
         payload.status = 400;
         if (!req.body.source && !req.file) payload.status = 200; // Dredd
     }
@@ -273,7 +273,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
     var payload = parseRequest(req);
 
     if (req.headers['content-type'].startsWith('application/x-www-form-urlencoded')) {
-        result.warning = 'Your client sent the wrong Content-Type header. Try pasting your document';
+        result.warning = `Your client sent the wrong Content-Type header (${req.headers['content-type']}). Try pasting your document`;
         payload.status = 400;
         if (!req.body.source && !req.file) payload.status = 200; // Dredd
     }

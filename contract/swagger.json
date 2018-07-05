@@ -27,7 +27,7 @@
         "application/x-yaml"
     ],
     "produces": [
-        "application/json",
+        "application/json; charset=utf-8",
         "application/x-yaml"
     ],
     "security": [],
