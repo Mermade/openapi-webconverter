@@ -16,6 +16,7 @@ const yaml = require('js-yaml');
 const converter = require('swagger2openapi');
 const validator = require('oas-validator');
 const s2oVersion = require('swagger2openapi/package.json').version;
+const recurse = require('reftools/lib/recurse.js').recurse;
 
 var status = {};
 status.startTime = new Date();
@@ -63,6 +64,16 @@ function parseRequest(req){
     }
 
     return payload;
+}
+
+function sanitise(obj) {
+    let result = Object.assign({},obj);
+    recurse(result,{},function(o,key,state){
+        if (typeof o[key] === 'function') {
+            delete o[key];
+        }
+    });
+    return result;
 }
 
 function sendObj(res,payload,obj) {
@@ -223,10 +234,10 @@ app.get('/api/v1/convert', function(req,res) {
                 converter.convert(obj,options,function(err,options){
                     if (err) {
                         result.error = err.message;
-                        result.options = globalOptions;
+                        result.options = sanitise(globalOptions);
                     }
                     else result = options.openapi;
-                    if (req.query.validate) {
+                    if (req.query.validate && options.openapi) {
                         status.validations++;
                         try {
                             result = {};
@@ -285,12 +296,13 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
         converter.convert(obj,options,function(err,options){
             if (err) {
                 result.message = err.message||'no message';
+                result.options = sanitise(result.options);
             }
             else {
                 result = options.openapi;
                 if (options.openapi && options.openapi.openapi && options.openapi.openapi.startsWith('3.')) payload.status = 200;
             }
-            if (validate) {
+            if (validate && !err) {
                 status.validations++;
                 try {
                     result = {};
