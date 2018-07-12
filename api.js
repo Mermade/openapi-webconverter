@@ -202,7 +202,7 @@ app.post('/api/v1/validate', upload.single('filename'), function(req,res){
         if (!req.body.source && !req.file) payload.status = 200; // Dredd
     }
     var obj = getObj(body,payload);
-    var options = { resolve:true };
+    var options = { resolve:false };
     try {
         result.status = validator.validateSync(obj,options);
         if (result.status === true) payload.status = 200;
@@ -291,7 +291,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
     var obj = getObj(body,payload);
     var options = {};
     options.patch = true;
-    options.resolve = true;
+    options.resolve = false;
     try {
         converter.convert(obj,options,function(err,options){
             if (err) {
