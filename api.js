@@ -11,7 +11,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const fetch = require('node-fetch');
 
-const yaml = require('js-yaml');
+const yaml = require('yaml');
 
 const converter = require('swagger2openapi');
 const validator = require('oas-validator');
@@ -34,7 +34,7 @@ function getObj(body,payload){
     }
     catch(ex) {
         try {
-            obj = yaml.safeLoad(body,{json:true});
+            obj = yaml.parse(body);
             payload.yaml = true;
         }
         catch(ex) {
@@ -85,7 +85,7 @@ function sendObj(res,payload,obj) {
         res.send(new Buffer.from(payload.prefix+JSON.stringify(obj,null,2)));
     }
     else {
-        res.send(new Buffer(payload.prefix+yaml.safeDump(obj)));
+        res.send(new Buffer.from(payload.prefix+yaml.stringify(obj)));
     }
 }
 
@@ -114,7 +114,7 @@ app.get('/contract/:spec.yaml',function(req,res){
     res.set('Content-Type', 'application/x-yaml');
     res.set('Access-Control-Allow-Origin','*');
     fs.readFile(path.join(__dirname,'contract',req.params.spec+'.json'),'utf8',function(err,data){
-        res.send(yaml.safeDump(yaml.safeLoad(data,{json:true})));
+        res.send(yaml.stringify(yaml.parse(data)));
     });
 });
 
