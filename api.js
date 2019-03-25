@@ -150,11 +150,11 @@ function validate(req, res, badge) {
     if (req.query.url) {
         superfetch(req.query.url).then(function(res) {
               return res.text();
-        }).then(function(body) {
+        }).then(async function(body) {
             var obj = getObj(body,payload);
             var options = { source: req.query.url, resolve:true };
             try {
-                result.status = validator.validateSync(obj,options);
+                result.status = await validator.validateSync(obj,options);
             }
             catch(ex) {
                 result.message = ex.message||'No message';
@@ -189,7 +189,7 @@ app.get('/api/v1/badge', function(req,res) {
     validate(req,res,true);
 });
 
-app.post('/api/v1/validate', upload.single('filename'), function(req,res){
+app.post('/api/v1/validate', upload.single('filename'), async function(req,res){
     status.validations++;
     var result = {};
     result.status = false;
@@ -204,7 +204,7 @@ app.post('/api/v1/validate', upload.single('filename'), function(req,res){
     var obj = getObj(body,payload);
     var options = { resolve:false };
     try {
-        result.status = validator.validateSync(obj,options);
+        result.status = await validator.validateSync(obj,options);
         if (result.status === true) payload.status = 200;
     }
     catch(ex) {
@@ -231,7 +231,7 @@ app.get('/api/v1/convert', function(req,res) {
             options.patch = true;
             options.resolve = true;
             try {
-                converter.convert(obj,options,function(err,options){
+                converter.convert(obj,options,async function(err,options){
                     if (err) {
                         result.error = err.message;
                         result.options = sanitise(globalOptions);
@@ -241,7 +241,7 @@ app.get('/api/v1/convert', function(req,res) {
                         status.validations++;
                         try {
                             result = {};
-                            result.status = validator.validateSync(options.openapi,options);
+                            result.status = await validator.validateSync(options.openapi,options);
                         }
                         catch (ex) {
                             result.status = false; // reset
@@ -293,7 +293,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
     options.patch = true;
     options.resolve = false;
     try {
-        converter.convert(obj,options,function(err,options){
+        converter.convert(obj,options,async function(err,options){
             if (err) {
                 result.message = err.message||'no message';
                 result.options = sanitise(result.options);
@@ -306,7 +306,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
                 status.validations++;
                 try {
                     result = {};
-                    result.status = validator.validateSync(options.openapi,options);
+                    result.status = await validator.validateSync(options.openapi,options);
                     if (result.status === true) payload.status = 200;
                 }
                 catch (ex) {
