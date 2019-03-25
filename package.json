@@ -35,6 +35,6 @@
     "yaml": "^1.2.0"
   },
   "devDependencies": {
-    "dredd": "^5.1.11"
+    "dredd": "^8.0.6"
   }
 }
