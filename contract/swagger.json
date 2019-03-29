@@ -163,7 +163,9 @@
                 "responses": {
                     "200": {
                         "description": "default",
-                        "schema": {}
+                        "schema": {
+                            "$ref": "#/definitions/validationResult"
+                        }
                     }
                 }
             },
@@ -198,7 +200,9 @@
                 "responses": {
                     "200": {
                         "description": "default",
-                        "schema": {}
+                        "schema": {
+                            "$ref": "#/definitions/validationResult"
+                        }
                     },
                     "400": {
                         "description": "Invalid request",
@@ -232,6 +236,17 @@
                     }
                 }
             }
+        }
+    },
+    "definitions": {
+        "validationResult": {
+            "type": "object",
+            "properties": {
+                "openapi": {
+                    "type": "string"
+                }
+            },
+            "required": [ "openapi" ]
         }
     }
 }

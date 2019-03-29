@@ -155,11 +155,13 @@ function validate(req, res, badge) {
             var options = { source: req.query.url, resolve:true };
             try {
                 result.status = await validator.validateSync(obj,options);
+                result.openapi = options.openapi.openapi || false;
             }
             catch(ex) {
                 result.message = ex.message||'No message';
                 console.warn(ex);
                 result.context = options.context.pop();
+                result.openapi = obj.openapi || false;
             }
             if (badge) {
                 status.badges++;
@@ -205,12 +207,14 @@ app.post('/api/v1/validate', upload.single('filename'), async function(req,res){
     var options = { resolve:false };
     try {
         result.status = await validator.validateSync(obj,options);
+        result.openapi = options.openapi.openapi || false;
         if (result.status === true) payload.status = 200;
     }
     catch(ex) {
         result.message = ex.message;
         console.warn(ex);
         result.context = options.context.pop();
+        result.openapi = obj.openapi || false;
     }
     sendObj(res,payload,result);
 });

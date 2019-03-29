@@ -184,10 +184,14 @@
                         "description": "default",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/validationResult"
+                                }
                             },
                             "application/x-yaml": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/validationResult"
+                                }
                             }
                         }
                     }
@@ -205,10 +209,14 @@
                         "description": "default",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/validationResult"
+                                }
                             },
                             "application/x-yaml": {
-                                "schema": {}
+                                "schema": {
+                                    "$ref": "#/components/schemas/validationResult"
+                                }
                             }
                         }
                     },
@@ -273,5 +281,18 @@
                 }
             }
         }
+    },
+    "components": {
+      "schemas": {
+        "validationResult": {
+            "type": "object",
+            "properties": {
+                "openapi": {
+                    "type": "string"
+                }
+            },
+            "required": [ "openapi" ]
+        }
+      }
     }
 }
