@@ -1,4 +1,4 @@
-from node:12.16-stretch
+FROM node:lts-alpine
 
 RUN mkdir /app
 ADD . /app
@@ -9,4 +9,4 @@ RUN npm install
 
 EXPOSE 3001
 
-CMD node index.js
+CMD [ "npm", "run", "start" ]
