@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
@@ -92,7 +94,7 @@ function sendObj(res,payload,obj) {
 var app = express();
 
 app.options('*',function(req,res,next){
-    res.set('Access-Control-Allow-Origin',req.headers['origin']||'*');
+    res.set('Access-Control-Allow-Origin',req.headers.origin||'*');
     res.set('Access-Control-Allow-Methods','GET, POST, HEAD, OPTIONS');
     res.set('Access-Control-Allow-Headers',req.headers['access-control-request-headers']||
         'Content-Type, Authorization, Content-Length, X-Requested-With');
@@ -144,7 +146,7 @@ function superfetch(u) {
 
 function validate(req, res, badge) {
     status.validations++;
-    result = {};
+    let result = {};
     result.status = false;
     var payload = parseRequest(req);
     if (req.query.url) {
@@ -221,15 +223,15 @@ app.post('/api/v1/validate', upload.single('filename'), async function(req,res){
 
 app.get('/api/v1/convert', function(req,res) {
     status.conversions++;
-    result = {};
+    let result = {};
     result.status = false;
     var payload = parseRequest(req);
     if (req.query.url) {
         superfetch(req.query.url).then(function(res) {
               return res.text();
         }).then(function(body) {
-            var obj = getObj(body,payload);
-            var globalOptions = options = {};
+            let obj = getObj(body,payload);
+            let globalOptions, options = {};
             options.origin = true;
             options.source = req.query.url;
             options.patch = true;
@@ -335,7 +337,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
 module.exports = {
     api : {
         app : app,
-        upload, upload,
+        upload: upload,
         status: status
     }
 };

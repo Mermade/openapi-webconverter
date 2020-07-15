@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "lint": "npx eslint *.js",
     "test": "npx dredd"
   },
   "engines": {
