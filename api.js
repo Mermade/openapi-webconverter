@@ -156,7 +156,7 @@ function validate(req, res, badge) {
             var obj = getObj(body,payload);
             var options = { source: req.query.url, resolve:true };
             try {
-                result.status = await validator.validateSync(obj,options);
+                result.status = await validator.validateInner(obj,options);
                 result.openapi = options.openapi.openapi || false;
             }
             catch(ex) {
@@ -208,7 +208,7 @@ app.post('/api/v1/validate', upload.single('filename'), async function(req,res){
     var obj = getObj(body,payload);
     var options = { resolve:false };
     try {
-        result.status = await validator.validateSync(obj,options);
+        result.status = await validator.validateInner(obj,options);
         result.openapi = options.openapi.openapi || false;
         if (result.status === true) payload.status = 200;
     }
@@ -247,7 +247,7 @@ app.get('/api/v1/convert', function(req,res) {
                         status.validations++;
                         try {
                             result = {};
-                            result.status = await validator.validateSync(options.openapi,options);
+                            result.status = await validator.validateInner(options.openapi,options);
                         }
                         catch (ex) {
                             result.status = false; // reset
@@ -312,7 +312,7 @@ app.post('/api/v1/convert', upload.single('filename'), function(req,res) {
                 status.validations++;
                 try {
                     result = {};
-                    result.status = await validator.validateSync(options.openapi,options);
+                    result.status = await validator.validateInner(options.openapi,options);
                     if (result.status === true) payload.status = 200;
                 }
                 catch (ex) {
