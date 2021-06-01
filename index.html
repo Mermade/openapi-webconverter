@@ -17,7 +17,7 @@ alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribb
 	<h3>Conversion / Validation <a href="https://github.com/mermade/swagger2openapi">engine</a> v<%= s2oVersion %></h3>
 	<h3>Web <a href="https://github.com/mermade/openapi-webconverter">frontend</a> version v<%= self.version %></h3>
 	<div align="center">
-		<a href="https://github.com/Mermade/swagger2openapi"><img src="https://github.com/Mermade/swagger2openapi/raw/master/docs/logo.png?raw=true" alt="logo" height="150"></a>
+		<a href="https://github.com/Mermade/swagger2openapi"><img src="https://github.com/Mermade/oas-kit/raw/main/docs/logo.png?raw=true" alt="logo" height="150"></a>
 	</div>
 
 <div class="tabs">
@@ -25,7 +25,7 @@ alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribb
    <div class="tab">
        <input type="radio" id="tab-1" name="tab-group-1" checked>
        <label class="tabLabel" for="tab-1">Convert</label>
-       
+
        <div class="content">
 			<form method="post" enctype="multipart/form-data" action="/api/v1/convert">
 				<label for="txtSource1">Paste Swagger 2.0 here:</label>
@@ -43,13 +43,13 @@ alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribb
 				<p>
 				<button class="button">Upload File</button>
 			</form>
-       </div> 
+       </div>
    </div>
 
    <div class="tab">
        <input type="radio" id="tab-2" name="tab-group-1">
        <label class="tabLabel" for="tab-2">Validate</label>
-       
+
        <div class="content">
 			<form method="post" enctype="multipart/form-data" action="/api/v1/validate">
 				<label for="txtSource1">Paste OpenAPI 3.0.x here:</label>
@@ -60,16 +60,16 @@ alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribb
 			<form method="post" enctype="multipart/form-data" action="/api/v1/validate">
 				<label for="file2">Or...</label>
 				<input id="file2" type="file" name="filename" accept="application/json,text/yaml,application/yaml">
-				<p>								
+				<p>
 				<button class="button">Upload File</button>
 			</form>
-       </div> 
+       </div>
    </div>
 
    <div class="tab">
        <input type="radio" id="tab-3" name="tab-group-1">
        <label class="tabLabel" for="tab-3">API</label>
-       
+
        <div class="content">
 			You may also use the API to convert Swagger 2.0 definitions or validate a 3.0.x definition
 
@@ -82,8 +82,8 @@ alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribb
 				<li><i>GET </i><a href="/api/v1/status">/api/v1/status</a></li>
 			</ul>
 			<br/>
-			Full API <a href="http://petstore.swagger.io/?url=https://openapi-converter.herokuapp.com/contract/swagger.json">documentation and console</a> are also available
-       </div> 
+			Full API <a href="https://redocly.github.io/redoc/?url=https://mermade.org.uk/contract/openapi.json">documentation</a> and <a href="http://petstore.swagger.io/?url=https://mermade.org.uk/contract/openapi.json">console</a> are also available
+       </div>
    </div>
 
    <div class="tab">
@@ -110,11 +110,11 @@ alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribb
 		<div class="content">
 			Conversion and validation is carried out by <a href="https://github.com/mermade/swagger2openapi">Swagger2OpenAPI</a>
 			<p>
-			Swagger2OpenAPI version <%= s2oVersion %> tracks the <%= targetVersion %> version of the 
+			Swagger2OpenAPI version <%= s2oVersion %> tracks the <%= targetVersion %> version of the
 			<a href="https://github.com/OAI/OpenAPI-Specification">OpenAPI Specification</a>
 			<% if (targetVersion.toLowerCase().indexOf('rc')>=0) { %>
 			<p>
-			<b>Warning:</b> This is a Release Candidate version of the specification and changes may be made before the final release, 
+			<b>Warning:</b> This is a Release Candidate version of the specification and changes may be made before the final release,
 			and Swagger2OpenAPI may be in flux tracking these changes.
 			<% } %>
 		</div>
