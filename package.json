@@ -8,9 +8,6 @@
     "lint": "npx eslint *.js",
     "test": "npx dredd"
   },
-  "engines": {
-    "node": "^6.4.0"
-  },
   "repository": {
     "url": "https://github.com/Mermade/openapi-webconverter.git",
     "type": "git"
