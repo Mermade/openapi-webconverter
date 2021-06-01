@@ -2,10 +2,10 @@
     "openapi": "3.0.0",
     "servers": [
         {
-            "url": "https://openapi-converter.herokuapp.com/api/v1"
+            "url": "https://mermade.org.uk/api/v1"
         },
         {
-            "url": "http://openapi-converter.herokuapp.com/api/v1"
+            "url": "http://mermade.org.uk/api/v1"
         }
     ],
     "info": {
