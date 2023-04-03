@@ -15,18 +15,18 @@
   "author": "Mike Ralphson <mike.ralphson@gmail.com>",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.2",
     "compression": "^1.7.4",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "multer": "^1.4.2",
-    "node-fetch": "^2.6.1",
-    "oas-validator": "^5.0.6",
-    "reftools": "^1.1.8",
-    "swagger2openapi": "^7.0.6",
-    "yaml": "^1.10.2"
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^2.6.9",
+    "oas-validator": "^5.0.8",
+    "reftools": "^1.1.9",
+    "swagger2openapi": "^7.0.8",
+    "yaml": "^2.2.1"
   },
   "devDependencies": {
-    "dredd": "^14.0.0"
+    "dredd": "^14.1.0"
   }
 }
