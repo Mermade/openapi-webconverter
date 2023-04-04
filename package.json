@@ -27,6 +27,6 @@
     "yaml": "^2.2.1"
   },
   "devDependencies": {
-    "dredd": "^14.1.0"
+    "@useoptic/optic": "^0.42.1"
   }
 }
